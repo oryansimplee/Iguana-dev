@@ -1,5 +1,13 @@
-function getHospitalCodes()
-   hospital_table = {
+function getHospitalCodes(company)
+   conifer_detroit_hospital_table = {
+      ['H'] = "cn_dhr", --"DMC Harper University Hsp / Hutzel", 
+      ['S'] = "cn_dsh", --"DMC Sinai-Grace Hsp", 
+      ['V'] = "cn_dhv", --"DMC Huron Valley - Sinai Hsp",
+      ['R'] = "cn_dra", --"DMC Rehab Institute of Michigan", 
+      ['D'] = "cn_ddr", --"DMC DMC Detroit Receiving Hsp/", 
+      ['C'] = "cn_dcr", --"DMC Children's Hsp of Michigan",
+   }
+   conifer_pbar_hospital_table = {
       ['006'] = "cn_del", --"Delray Medical Center", 
       ['009'] = "cn_lak", --"Lakewood Regional Medical Center", 
       ['012'] = "cn_mod", --"Doctors Medical Center of Modesto",
@@ -53,10 +61,19 @@ function getHospitalCodes()
       ['737'] = "cn_svm", --"Sierra Vista Regional Medical Center",
       ['778'] = "cn_fvr", --"Fountain Valley Regional Hospital"
    }
-   if iguana.isTest() or os.getenv("IGUANA-DEBUG-FLAG") then hospital_table["000"] = "cn_test" end
-   return hospital_table
+    if iguana.isTest() or os.getenv("IGUANA-DEBUG-FLAG") then 
+       conifer_detroit_hospital_table["000"] = "cn_test" 
+       conifer_pbar_hospital_table["000"] = "cn_test" 
+    end
+   
+   if (company == "detroit") then
+       return conifer_detroit_hospital_table
+   elseif (company == "pbar") then
+       return conifer_pbar_hospital_table
+    end
+      
 end
 
-function getHospitalNameByCode(code)
-   return getHospitalCodes()[code]
+function getHospitalNameByCode(company,code)
+   return getHospitalCodes(company)[code]
 end

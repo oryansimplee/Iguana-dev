@@ -22,7 +22,7 @@
       error_handling="0"
       use_translator_filter="true"
       translator_guid="conifer-pbar-processor-Filter-QH4PdcI5A0rF3N"
-      translator_commit_id="c967f52faa15076b8edd892aa964175ca526ac28"
-      translator_commit_comment="Import Translators: first commit process channel">
+      translator_commit_id="7843d93c5d8899389f28a479c65f4f18792ad436"
+      translator_commit_comment="test">
    </message_filter>
 </channel>

@@ -10,12 +10,13 @@
         "logger",
         "node",
         "parsemessage",
+        "processmessage",
         "stringutil"
     ],
     "OtherDependencies": [
         "example/demo.vmd"
     ],
-    "timestamp": "1516017353",
+    "timestamp": "1516018377",
     "version_info": {
         "build": 0,
         "major": 6,

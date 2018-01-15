@@ -6,13 +6,13 @@ require 'stringutil'
 require 'hospital_codes'
 require 'logger'
 
-function parseMessage(msg)
+function parseMessage(msg, company)
    patient_details_json = nil
    patient_details = msg.PID
    msh_event_type = msg.MSH[9][2]:nodeValue()
    if ( (msh_event_type == 'A01') or (msh_event_type == 'A04') or (msh_event_type == 'A05') or (msh_event_type == 'A08')) then
       log('Starting to parse patient data, event type:' .. msh_event_type, "debug")
-      patient_details_json = buildAdmissionHL7Json(msg, msh_event_type)
+      patient_details_json = buildAdmissionHL7Json(msg, msh_event_type, company)
    else 
       log("Not supported MSH event:" .. msh_event_type, "warning")
 	end
@@ -26,9 +26,10 @@ sexCodeMap = codemap.map{
    f='Female'
 }
 
-function buildAdmissionHL7Json(msg, msh_event_type)
+function buildAdmissionHL7Json(msg, msh_event_type, company)
    hl7_json = json.createObject()
-   hl7_json.provider = getProviderName(msg.MSH[4][2]:nodeValue())
+   local provider_code =  getProviderCode(msg,company)
+   hl7_json.provider = getProviderName(company , provider_code)
    hl7_json.message_type = msh_event_type
    hl7_json.message_id = iguana.messageId()
    hl7_json.message_control_id = msg.MSH[10]:nodeValue()
@@ -36,6 +37,14 @@ function buildAdmissionHL7Json(msg, msh_event_type)
    hl7_json.bills = buildBillsJson(msg.PV1, msg.PID, hl7_json.provider)
    hl7_json.extra_fields = setExtraFields()
    return hl7_json
+end
+
+function getProviderCode(msg,compnay)
+   --if (company =="detroit") then
+     --return msg.MSH[6][1]:nodeValue()
+   --elseif  (company =="pbar") then
+     return msg.MSH[4][2]:nodeValue()
+   --end
 end
 	 
 function buildAccountJson(pid_details, gt_details)
@@ -85,8 +94,8 @@ function buildPatientJson(pid_details)
    return patient_json
 end
 
-function getProviderName(provider_code)
-   return getHospitalNameByCode(provider_code)
+function getProviderName(company, provider_code)
+   return getHospitalNameByCode(company, provider_code)
 end
 
 function setExtraFields()
