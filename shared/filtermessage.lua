@@ -5,14 +5,14 @@ require 'logger'
 local SUPPORTED_EVENTS_CODE = {'A01', 'A04', 'A05', 'A08', 'A11'}
 
 function filterMessage(msg, company)
-   local configured_partner_name = "CONIFER" --os.getenv("IGUANA-PARTNER-NAME")
+   local configured_partner_name = getCompanyName(msg,company)
 
    if msg:nodeName() ~= 'ADT' then
       log('Unexpected message type., Supporting only ADT messages', "error")
       return false
    end
    
-   local message_partner_name = getPartnerName(msg,company)
+   local message_partner_name = getMessagePartnerName(msg,company)
  
    if (message_partner_name ~= configured_partner_name) then
       log('Unsupported partner, received:'..message_partner_name..' expecting to get:' .. configured_partner_name, "error")
@@ -25,7 +25,7 @@ function filterMessage(msg, company)
       return false
 	end
    
-   hospital_code = getProviderCode(msg,company)
+   local hospital_code = getPartnerCode(msg,company)
   
    if unsupportedHospitalCode(hospital_code, company) then
       log('Unsupported facility 3 digits code, received:'..hospital_code, "error")
@@ -40,21 +40,6 @@ function unsupportedEvent(msh_event_type)
       if msh_event_type == value then return false end
    end
    return true
-end
-
-function getPartnerName(msg,company)
-   if (company =="detroit") then
-     return string.upper(msg.MSH[5][1]:nodeValue())
-   elseif  (company =="pbar") then
-     return string.upper(msg.MSH[4][1]:nodeValue())
-   end
-end
-function getProviderCode(msg,compnay)
-   if (company =="detroit") then
-     return msg.MSH[6][1]:nodeValue()
-   elseif  (company =="pbar") then
-     hospital_code = msg.MSH[4][2]:nodeValue()
-   end
 end
 
 function unsupportedHospitalCode(hospital_code, company)

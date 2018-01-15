@@ -1,3 +1,26 @@
+
+function getMessagePartnerName(msg,company)
+   if (company =="detroit") then
+     return string.upper(msg.MSH[5][1]:nodeValue())
+   elseif  (company =="pbar") then
+     return string.upper(msg.MSH[4][1]:nodeValue())
+   end
+end
+
+function getCompanyName(msg,company)
+   if (company =="detroit") or (company =="pbar")   then
+     return "CONIFER"
+   end
+end
+
+function getPartnerCode(msg,company)
+   if (company =="detroit") then
+     return msg.MSH[6][1]:nodeValue()
+   elseif  (company =="pbar") then
+     return msg.MSH[4][2]:nodeValue()
+   end
+end
+
 function getHospitalCodes(company)
    conifer_detroit_hospital_table = {
       ['H'] = "cn_dhr", --"DMC Harper University Hsp / Hutzel", 

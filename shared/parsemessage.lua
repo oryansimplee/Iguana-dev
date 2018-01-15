@@ -28,7 +28,7 @@ sexCodeMap = codemap.map{
 
 function buildAdmissionHL7Json(msg, msh_event_type, company)
    hl7_json = json.createObject()
-   local provider_code =  getProviderCode(msg,company)
+   local provider_code =  getPartnerCode(msg,company)
    hl7_json.provider = getProviderName(company , provider_code)
    hl7_json.message_type = msh_event_type
    hl7_json.message_id = iguana.messageId()
@@ -39,13 +39,6 @@ function buildAdmissionHL7Json(msg, msh_event_type, company)
    return hl7_json
 end
 
-function getProviderCode(msg,compnay)
-   --if (company =="detroit") then
-     --return msg.MSH[6][1]:nodeValue()
-   --elseif  (company =="pbar") then
-     return msg.MSH[4][2]:nodeValue()
-   --end
-end
 	 
 function buildAccountJson(pid_details, gt_details)
    local account_json = json.createObject()

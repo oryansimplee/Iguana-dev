@@ -1,0 +1,28 @@
+<channel
+   name="conifer-detroit-processor"
+   guid="07B7AA022840843869334CCA8CB1BB0C"
+   description="Pull from all messages listener queue.&#xD;&#xA;Filter irrelevant messages, parse &amp; send to simplee"
+   start_automatically="false"
+   logging_level="2"
+   use_message_filter="true">
+   <to_channel>
+      <dequeue_list>
+         <dequeue
+            source_name="conifer-pbar-listener"
+            dequeue_guid="791ED5F82B4C8017B7E76E4F7CDB1406"/>
+      </dequeue_list>
+   </to_channel>
+   <from_channel/>
+   <message_filter
+      filter_after_logging="false"
+      log_pre_post_filter_message="true"
+      filter_vmd_path=""
+      transformation_mode="0"
+      scripted_transformation_configuration_name="default"
+      error_handling="0"
+      use_translator_filter="true"
+      translator_guid="conifer-detroit-processor-Filter-b801rs4k0rPVPM"
+      translator_commit_id="8cb7fac5665bcb45fb5f9a67aa2b8d7531ad9b23"
+      translator_commit_comment="update hospital codes">
+   </message_filter>
+</channel>

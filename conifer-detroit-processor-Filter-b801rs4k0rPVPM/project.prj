@@ -1,0 +1,25 @@
+{
+    "LocalDependencies": [],
+    "LuaDependencies": [
+        "codemap",
+        "dateparse",
+        "filtermessage",
+        "hl7util",
+        "hospital_codes",
+        "http",
+        "logger",
+        "node",
+        "parsemessage",
+        "processmessage",
+        "stringutil"
+    ],
+    "OtherDependencies": [
+        "example/demo.vmd"
+    ],
+    "timestamp": "1516031119",
+    "version_info": {
+        "build": 0,
+        "major": 6,
+        "minor": 0
+    }
+}
