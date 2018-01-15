@@ -1,0 +1,28 @@
+<channel
+   name="conifer-pbar-listener"
+   guid="D18E0172F4798D841E8ADA8E91D79C72"
+   description="Receive HL7 messages from conifer-pbar , send messages to process  procees"
+   start_automatically="false"
+   logging_level="2"
+   use_message_filter="false">
+   <to_channel>
+   </to_channel>
+   <from_llp_listener
+      ack_vmd_path="/home/deploy/hl7/iNTERFACEWARE-Iguana/autoack.vmd"
+      port="2575"
+      connection_timeout="30"
+      unlimited_connection_timeout="false"
+      ack_style="fast"
+      ssl_certificate_file="/etc/nginx/keys/simplee-mar-2017.crt"
+      ssl_private_key_file="/etc/nginx/keys/simplee-apr-2014-b.key"
+      ssl_verify_peer="false"/>
+   <message_filter
+      filter_after_logging="false"
+      log_pre_post_filter_message="true"
+      filter_vmd_path=""
+      transformation_mode="0"
+      scripted_transformation_configuration_name="default"
+      error_handling="0"
+      use_translator_filter="true">
+   </message_filter>
+</channel>
