@@ -1,0 +1,23 @@
+<channel
+   name="2.process-messages-pbar"
+   guid="A8B7C40583C9B710C514B565D3D2ADB2"
+   description="Pull from all messages queue.&#xD;&#xA;Filter irrelevant messages.&#xD;&#xA;Forward messages to filtered messages queue, messages will be parsed by parser"
+   start_automatically="false"
+   logging_level="2"
+   use_message_filter="true">
+   <to_channel>
+   </to_channel>
+   <from_channel/>
+   <message_filter
+      filter_after_logging="true"
+      log_pre_post_filter_message="true"
+      filter_vmd_path=""
+      transformation_mode="0"
+      scripted_transformation_configuration_name="default"
+      error_handling="0"
+      use_translator_filter="true"
+      translator_guid="2messages-queue-to-filter-Filter-Gf14yyugb861x0"
+      translator_commit_id="c967f52faa15076b8edd892aa964175ca526ac28"
+      translator_commit_comment="Import Translators: first commit process channel">
+   </message_filter>
+</channel>
